@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Form</title>
+
+
+    <style>
+        *{
+            font-family: 'Times New Roman';
+        }
+        img{
+            width: 15.5px;
+            position: relative;
+            right: 3px;
+            top: 2px;
+        }
+        body{
+            background-image: url('C:/Users/Nikhil Kumar/OneDrive/Desktop/Img/dev_bg.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            text-align: center;
+        }
+       
+        #preForm{
+            border-radius: 7px;
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.491);
+            /* backdrop-filter: blur(100px); */
+            padding: 40px 25px 50px 0px; 
+            margin-top: 200px; 
+            border: 2px solid white;
+        }
+        form{
+            text-align: center;
+
+            
+        }
+        input{
+            color: rgb(0, 0, 0);
+            height: 32px;
+            width: 250px;
+            background-color: transparent;
+           border: 0.5px solid black;
+           border-radius: 7px;
+
+        }
+        input:hover{
+            width: 250px;
+            background-color: transparent;
+            border: 2px solid purple;
+            /* background: linear-gradient(135deg,#351a60e6 0%,#75018cd1 50%,#003a91e2 100%); */
+             /* background: linear-gradient(45deg,rgba(255, 0, 0, 0.594) 0%,rgba(0, 0, 255, 0.616) 50%, #0066ffd3 80%);
+            height: 32px;
+            box-shadow: 1px 1px 20px whitesmoke;
+            border-bottom-width: 2px;
+            border-bottom-color: white; */
+            box-shadow: 1px 1px 15px rgb(159, 60, 159);
+        }
+
+        input:focus{
+            /* height: 32px;
+            width: 250px;
+            color: white;
+            background: linear-gradient(45deg,rgba(255, 0, 0, 0.594) 0%,rgba(0, 0, 255, 0.616) 50%, #0066ffd3 80%);
+            border: 2px solid black;
+            box-shadow: 1px 1px 20px white;
+            border-bottom-width: 2px;
+            border-bottom-color: white; */
+        }
+
+        .gmail_pass{
+            padding-left: 25px;
+        }
+       
+        .icone{
+            position: relative;
+            left: 28px;
+        }
+        
+        #chek{
+            width: 15px;
+            height: 15px;
+            margin-left: 15px;
+        }
+        #log_in{
+            height:32px;
+            color: black;
+            width: 278px;
+            margin-left: 30px;
+            font-weight: bolder;
+             background: linear-gradient(45deg,rgba(255, 0, 0, 0.594) 0%,rgba(0, 0, 255, 0.616) 50%, #0066ffd3 80%);
+            /* background: linear-gradient(135deg,#351a60e6 0%,#75018cd1 50%,#003a91e2 100%); */
+            
+            /* background: linear-gradient(135deg,#7b2ff7 0%,#5f5cf0 50%,#3f8cff 100%); */
+        }
+        #log_in:hover{
+            width: 278px;
+            margin-left: 30px;
+            font-weight: bold;
+             /* background: linear-gradient(45deg,red 0%,blue 50%,cyan 80%); */
+              background: linear-gradient(45deg,rgba(255, 0, 0, 0.594) 0%,rgba(0, 0, 255, 0.616) 50%, #0066ffd3 80%);
+             box-shadow: 1px 1px 20px white;
+             border-width: 00px;
+             color: white;
+             height: 32px;
+             
+        }
+        strong{
+            position: relative;
+            bottom: 3px;
+            font-size: 15px;
+            
+        }
+        a{
+            margin-left: 30px;
+            font-weight: bolder;
+            color: rgb(17, 0, 255);
+        }
+        p{
+            position: relative;
+            bottom: 9px; 
+        }
+        .cyan{
+            color: cyan;
+            display: inline;
+        }
+       footer{
+        margin-top: 200px;
+       }
+       h1{
+        color: purple;
+       }
+        h1::before{
+            content: 'Welcome';
+            color:rgb(2, 2, 109);
+        }
+        .logo_images{
+            margin-top: 4px;
+            padding: 2px;
+            width: 37px;
+            border-radius: 50%;
+            background-color: black;
+            border: 1px solid white;
+            margin-left: 12px;
+            position: relative;
+            top: 3px;
+        }
+        .google_image{
+            width: 33px;
+            padding: 3px;
+            border-radius: 50%;
+            background-color: rgb(0, 0, 0);
+            border: 1px solid rgb(255, 255, 255);
+        }
+
+
+
+        /* Header start here  */
+
+    header{
+     position: fixed;
+     width: 100%;
+     margin-left: -8px;
+     margin-top: -8px;
+     
+}
+#main_header{
+    display: flex;
+    background-color: rgb(74, 17, 113);
+    border: 0.10px solid rgb(166, 0, 255);
+}
+
+#logo_img{
+    width: 45px;
+    border-radius: 50%;
+    margin-right: 3px;
+    padding: 5px;
+}
+
+#logoname{
+    color: white;
+    margin-top: 10px;
+
+}
+
+#search{
+    height: 30px;
+    width: 50%;
+    margin-left: 30%;
+    margin-top: 11px;
+    padding-left: 10px;
+    padding-right: 40px;
+    border-radius: 25px;
+    background-color: rgba(255, 255, 255, 0.354);
+    border-color: rgb(109, 8, 109);
+  font-weight: bold;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+#search_icon{
+    width: 36px;
+    height: 30px;
+    font-size: 17px;
+    border: 0px solid white;
+    background-color: rgba(255, 255, 255, 0.354);
+    border-radius: 50%;
+    margin-top: 11px;
+    margin-left: -35px;
+}
+
+/* Header Logo End here */
+
+
+/* Header Bar start here */
+
+#bar{
+    display: flex;
+    justify-content: space-between;
+    padding: 7px;
+    background-color: black;
+    border: 0.10px solid rgb(166, 0, 255);
+    border-top-width: 00px;
+}
+.bar_a{
+    color: white;
+}
+.bar_a:hover{
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px red;
+    box-shadow: 1px 1px 20px rgb(255, 0, 0);
+    border-radius: 5px;
+    padding: 0px 3px 0px 0px;
+    border: 0.1px solid rgba(207, 0, 0, 0.863);
+    scale: 1.1;
+    transition: 0.3s;
+    text-decoration: underline dashed rgb(255, 255, 255) 1px;
+}
+/* Header Bar End here */
+
+        /* Header end here */
+
+
+    </style>
+</head>
+<body>
+
+
+    <!-- Header -->
+    <header>
+    
+         <div id="main_header">
+
+         <img id="logo_img" src="C:\Users\Nikhil Kumar\OneDrive\Desktop\Img\logo.png"    alt="Logo"> 
+
+         <h2 id="logoname"> ᑕ s→Ɲɪ֟፝ᴋʜɪᏞㅤ모</h2>
+
+         <input id="search" type="search" value="Search Here .....     " placeholder="Seatch ..."> 
+
+         <button id="search_icon" type="submit">🔍</button>
+
+    </div>
+
+    <div id="bar">
+        <a class="bar_a" href="about.html">About</a>
+        <a class="bar_a" href="#main_footer_info">Contect_us</a>
+        <a class="bar_a" href="#main_footer_info">Accadmic</a>
+        <a class="bar_a" href="#main_footer_info">Social media</a>
+        <a class="bar_a" href="log-in.html">Log_in</a>
+    </div>
+    <hr color="perple">
+    </header>
+    <!-- Header End -->
+
+    <div id="preForm">
+    <h1 align="center"> Back <div class="cyan">!!</div></h1>
+
+    <p align="center">Kindly login to your account </p>
+
+    
+    <form>
+        <b class="icone"><img src="/Users/Nikhil Kumar/OneDrive/Desktop/Img/gmail.jpg" alt=""></b>
+        <input class="gmail_pass"  type="gmail" placeholder="Enter adderess"><br><br>
+
+        <b class="icone">🔒</b>
+        <input class="gmail_pass"  type="password" placeholder="Password"><br><br>
+<div id="forget">
+
+        <input id="chek" type="checkbox"> <strong>Remember me</strong> 
+               <strong><a href="#">Forgot password?</a></strong>
+
+       <br><br>
+       
+       <input id="log_in" type="submit" value="Log in">
+</div>
+
+    </form>
+
+   <br> <small>-------------- or cntinue with --------------</small> <br>
+
+    <img class="google_image" src="C:/Users/Nikhil Kumar/OneDrive/Desktop/Img/google.png" alt="google.com">
+    <img class="logo_images" src="C:/Users/Nikhil Kumar/OneDrive/Desktop/Img/facebook.png" alt="google.com">
+    <img class="logo_images" src="C:/Users/Nikhil Kumar/OneDrive/Desktop/Img/apple.png" alt="google.com">
+
+
+</div>
+
+
+</body>
+</html>

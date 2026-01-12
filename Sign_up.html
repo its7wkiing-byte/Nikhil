@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        form{
+            background-color: rgba(11, 4, 78, 0.566);
+            padding: 33px 14px 29px 14px;
+            display: inline-block;
+            margin-top: 100px;
+            margin-bottom: 100px;
+            border-radius: 11px;
+            backdrop-filter: blur(10px);
+
+        }
+        input{
+            background-color: transparent;
+            border-width: 0px;
+            border-style: solid;
+            border-bottom-width: 1px;
+            border-color: white;
+        }
+        input:active{
+             border-width: 0px;
+            border-style: solid;
+            border-bottom-width: 1px;
+        }
+
+        input[type="radio"]{
+            color: rgb(0, 255, 17);
+        }
+
+        #sub{
+            
+            background-color: red;
+            color: cyan;
+            padding: 7px 15px 7px 15px;
+            font-size: 16px;
+            border-radius: 7px;
+            font-weight: bold;
+            border: 1px solid cyan;
+            box-shadow: 1px 1px 20px rgb(0, 234, 255);
+            text-shadow: 1px 1px black;
+        
+        }
+        label,legend{
+            color: aliceblue;
+        }
+
+        legend{
+            font-size: 27px;
+           
+        }
+
+        input[type="radio"]:hover {
+      appearance: none; /* Default style हटाना */
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid rgb(255, 255, 255); /* Cyan border */
+      outline: none;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgb(255, 255, 255), 0 0 20px rgb(255, 255, 255); /* Neon glow */
+      transition: 0.3s;
+    }
+
+     input[type="radio"]:checked {
+      background-color: #0ff; /* Fill when selected */
+      box-shadow: 0 0 20px #0ff, 0 0 40px #0ff; /* Stronger glow */
+    }
+
+  
+ /* Logo start here */                    
+header{
+     position: fixed;
+     width: 100%;
+     margin-top: -10px;
+     
+}
+#animes_heading{
+    font-family: time new roman;
+    text-align: center;
+    border: 0.7px dashed grey;
+    display: inline-block;
+    margin: 10px;
+}
+#main_header{
+    display: flex;
+    background-color: rgb(74, 17, 113);
+    border: 0.10px solid rgb(166, 0, 255);
+}
+
+#logo_img{
+    width: 45px;
+    border-radius: 50%;
+    margin-right: 3px;
+    padding: 5px;
+}
+
+#logoname{
+    color: white;
+    margin-top: 10px;
+
+}
+
+#search{
+    height: 30px;
+    width: 50%;
+    margin-left: 30%;
+    margin-top: 11px;
+    padding-left: 10px;
+    padding-right: 40px;
+    border-radius: 25px;
+    background-color: rgba(255, 255, 255, 0.354);
+    border-color: purple;
+  font-weight: bold;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+#search_icon{
+    width: 36px;
+    height: 30px;
+    font-size: 17px;
+    border: 0px solid white;
+    background-color: rgba(255, 255, 255, 0.354);
+    border-radius: 50%;
+    margin-top: 11px;
+    margin-left: -35px;
+}
+
+/* Header Logo End here */
+#contener{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+/* Footer css start here */
+.footer_info{
+border-right: 1px solid black;
+padding: 20px;
+background-color: rgba(169, 168, 168, 0.338);
+border-radius: 2px;
+
+}
+#main_footer_info{ 
+    margin-top: -10px; 
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 1px 1px 20px grey;
+
+} 
+.footer_info_heading{
+margin-bottom: 4px;
+margin-left: -10px;
+}
+/* Footer css start here */
+
+/* 
+#bg-img{
+    background-image: url('C:/Users/Nikhil Kumar/OneDrive/Desktop/Img/bg_form_img.jpg');
+    background-size: cover;
+
+}
+*/
+#bg-video {
+  position: fixed;       /* Stays fixed in the background */
+  top: 70px;
+  
+  width: 100%;       /* Cover full width */
+  height: 446px;      /* Cover full height */
+  z-index: -1;           /* Push behind content */
+  object-fit: cover;     /* Crop video to fill screen */
+}
+
+.contentbody{
+  position: relative;
+  z-index: 1;            /* Ensure text is above video */
+  text-align: center;
+}
+
+
+    </style>
+</head>
+<body>
+
+<div id="bg-img">
+       <video autoplay muted loop id="bg-video">
+        <source src="C:\Users\Nikhil Kumar\OneDrive\Desktop\Img\form_video.mp4" type="video/mp4">
+        </video>
+<div class="contentbody">
+     <!-- Header -->
+    <!-- Header -->
+    <header>
+    
+            <div id="main_header">
+       <img id="logo_img" src="C:\Users\Nikhil Kumar\OneDrive\Desktop\Img\logo.png" alt="Logo"> 
+         <h2 id="logoname"> ᑕ s→Ɲɪ֟፝ᴋʜɪᏞㅤ모</h2>
+
+         <input id="search" type="search" value="Search Here .....     " placeholder="Seatch ..."> 
+         <button id="search_icon" type="submit">🔍</button>
+    </div>
+<center>Hello</center>
+
+    </header>
+    <!-- Header End -->
+    <!-- Header End -->
+    <br><br>
+<div id="contener">
+    <form action="">
+        <fieldset id="one">
+        <legend>Resitration:</legend>
+        <label for="Name">Enter your name: &nbsp;</label>
+        <input type="text" name="N'M" placeholder="Nikhil Kumar" required> <br><br>
+
+        <label for="Phone">Enter your mobile: </label>
+        <input type="number" name="No" placeholder="0000 0000 00" required><br><br>
+
+        <label for="pass">Enter your passwrd</label>
+        <input type="password" name="pass" placeholder="xyz@123***" required><br><br>
+
+        <label for="gender">Enter your gender :</label>
+
+        <input class="radiooo" type="radio" name="gender" required> 
+        <label for="male">Male</label> 
+
+        <input class="radiooo" type="radio" name="gender" required>  
+        <label for="Female">Female</label> <br><br>
+<a href="index.html">
+        <input id="sub" type="Button" value="Submit">
+   </a>
+   </fieldset>
+ </form>
+ </div>
+
+</div>
+</div>
+<!-- Footer start here -->
+
+<footer>
+    <hr>
+   
+    <br>
+    <!-- Footer information start here -->
+    <div id="main_footer_info"> 
+    
+    <div class="footer_info">
+        
+        <h3 class="footer_info_heading">Contect_us</h3> 
+        <ul>
+            <li>Mobile Phone</li>
+            <li>Whats'up.</li>
+            <li>Gmail</li>
+        </ul>
+    
+    </div>
+ 
+    <div class="footer_info">
+        
+        <h3 class="footer_info_heading">Social mediya</h3> 
+        <ul>
+            <li>Facebook</li>
+            <li>Inshtagram</li>
+            <li>Linkdin</li>
+        </ul>
+    
+    </div>
+
+    <div class="footer_info">
+        
+        <h3 class="footer_info_heading">Our Content</h3> 
+
+        <ul>
+            <li>Education</li>
+            <li>Health cere</li>
+            <li>Cyber security</li>
+        </ul>
+    
+    </div>
+    </div>
+ <br><h3 align="center">&copy; All copy right reserved</h3><br>
+</footer>
+
+</body>
+</html>
