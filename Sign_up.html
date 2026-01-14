@@ -5,29 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        /* This is css */
+        
         form{
-            background-color: rgba(11, 4, 78, 0.566);
+            background-color: rgba(0, 4, 73, 0.597);
             padding: 33px 14px 29px 14px;
             display: inline-block;
             margin-top: 100px;
             margin-bottom: 100px;
             border-radius: 11px;
-            backdrop-filter: blur(10px);
+            
+            
 
         }
         input{
-            background-color: transparent;
-            border-width: 0px;
+            background-color: rgba(228, 226, 226, 0.858);
+            color: white;
+            border-width: 1px;
             border-style: solid;
-            border-bottom-width: 1px;
-            border-color: white;
-        
+            border-color: rgb(255, 200, 0);
+            border-bottom-width: 1.5px;
+            border-bottom-color: rgb(43, 255, 0);
+            backdrop-filter: blur(1px); 
+            padding: 5px;
+            border-radius: 5px;
+       
         }
-        input:active{
+        input:hover, input:active{
+            background-color: rgb(86, 86, 86);
              border-width: 0px;
             border-style: solid;
-            border-bottom-width: 1px;
+            border-bottom-width: 1.5px;
+            border-bottom-color: rgb(43, 255, 0);
         }
 
         input[type="radio"]{
@@ -48,7 +56,7 @@
         
         }
         label,legend{
-            color: aliceblue;
+            color: rgb(255, 200, 0);
         }
 
         legend{
@@ -56,10 +64,11 @@
            
         }
 
-        input[type="radio"]:hover {
+      input[type="radio"]:hover {
       appearance: none; /* Default style हटाना */
-      width: 20px;
-      height: 20px;
+      background-color: rgb(38, 255, 0);
+      width: 15px;
+      height: 15px;
       border-radius: 50%;
       border: 2px solid rgb(255, 255, 255); /* Cyan border */
       outline: none;
@@ -69,8 +78,8 @@
     }
 
      input[type="radio"]:checked {
-      background-color: #0ff; /* Fill when selected */
-      box-shadow: 0 0 20px #0ff, 0 0 40px #0ff; /* Stronger glow */
+      background-color: rgb(38, 255, 0); /* Fill when selected */
+      box-shadow: 0 0 20px rgb(106, 255, 0), 0 0 40px rgb(2, 255, 15); /* Stronger glow */
     }
 
   
@@ -168,8 +177,7 @@ margin-left: -10px;
 */
 #bg-video {
   position: fixed;       /* Stays fixed in the background */
-  top: 70px;
-  
+  top: 65px;
   width: 100%;       /* Cover full width */
   height: 446px;      /* Cover full height */
   z-index: -1;           /* Push behind content */
@@ -189,7 +197,7 @@ margin-left: -10px;
 
 <div id="bg-img">
        <video autoplay muted loop id="bg-video">
-        <source src="form_video.mp4" type="video/mp4">
+        <source src="vid.mp4" type="video/mp4">
         </video>
 <div class="contentbody">
      <!-- Header -->
@@ -203,14 +211,14 @@ margin-left: -10px;
          <input id="search" type="search" value="Search Here .....     " placeholder="Seatch ..."> 
          <button id="search_icon" type="submit">🔍</button>
     </div>
-<center>Hello</center>
+
 
     </header>
     <!-- Header End -->
     <!-- Header End -->
     <br><br>
 <div id="contener">
-    <form action="">
+    <form>
         <fieldset id="one">
         <legend>Resitration:</legend>
         <label for="Name">Enter your name: &nbsp;</label>
@@ -222,13 +230,13 @@ margin-left: -10px;
         <label for="pass">Enter your passwrd</label>
         <input type="password" name="pass" placeholder="xyz@123***" required><br><br>
 
-        <label for="gender">Enter your gender :</label>
+        <label for="gender">Enter your gender :</label>  &nbsp;
 
         <input class="radiooo" type="radio" name="gender" required> 
-        <label for="male">Male</label> 
+        <label for="male">Male</label> &nbsp; &nbsp; 
 
         <input class="radiooo" type="radio" name="gender" required>  
-        <label for="Female">Female</label> <br><br>
+        <label for="Female">Female</label> <br><br>&nbsp;
 <a href="index.html">
         <input id="sub" type="Button" value="Submit">
    </a>
@@ -252,7 +260,7 @@ margin-left: -10px;
         <h3 class="footer_info_heading">Contect_us</h3> 
         <ul>
             <li>Mobile Phone</li>
-            <li>Whats'up.</li>
+            <li>WhatsApp</li>
             <li>Gmail</li>
         </ul>
     
@@ -263,8 +271,8 @@ margin-left: -10px;
         <h3 class="footer_info_heading">Social mediya</h3> 
         <ul>
             <li>Facebook</li>
-            <li>Inshtagram</li>
-            <li>Linkdin</li>
+            <li>Instagram</li>
+            <li>Telegram</li>
         </ul>
     
     </div>
@@ -275,7 +283,7 @@ margin-left: -10px;
 
         <ul>
             <li>Education</li>
-            <li>Health cere</li>
+            <li>Health care</li>
             <li>Cyber security</li>
         </ul>
     
@@ -286,5 +294,3 @@ margin-left: -10px;
 
 </body>
 </html>
-
-
