@@ -2,7 +2,7 @@
 <html>
 <head>
 
-  <title>Smart Report System</title>
+  <title>Advanced Smart Report</title>
 
   <!-- html2canvas -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -16,35 +16,66 @@
     }
 
     #report{
-      width:400px;
+      width:550px;
       background:white;
       padding:20px;
       border:2px solid black;
+      margin:auto;
+      position:relative;
+    }
+
+    h1{
+      text-align:center;
+      color:darkblue;
+      margin-bottom:5px;
+    }
+
+    h2{
+      text-align:center;
+      margin-top:0;
     }
 
     table{
       border-collapse:collapse;
       width:100%;
+      margin-top:10px;
     }
 
     th,td{
       border:1px solid black;
-      padding:8px;
+      padding:10px;
       text-align:center;
+      font-size:18px;
     }
 
     input,select{
-      width:100px;
-      padding:5px;
+      width:140px;
+      padding:6px;
+      font-size:16px;
     }
 
     button{
       margin-top:10px;
       padding:10px 15px;
       cursor:pointer;
+      font-size:16px;
     }
 
-    h2{
+    .btns{
+      text-align:center;
+    }
+
+    .topRight{
+      position:absolute;
+      top:15px;
+      right:20px;
+      text-align:right;
+      font-size:14px;
+      line-height:22px;
+    }
+
+    .topInputs{
+      margin-bottom:15px;
       text-align:center;
     }
 
@@ -54,40 +85,61 @@
 
 <body>
 
-<h1>Its by : Nikhil Kumar</h1>
+<!-- INPUTS -->
+<div class="topInputs">
 
+  <label>Customer Name :</label>
+
+  <input
+  type="text"
+  id="customerName"
+  placeholder="Enter Name">
+
+  &nbsp;&nbsp;
+
+  <label>Select Report :</label>
+
+  <select id="reportType">
+
+    <option value="Monthly">
+      Monthly
+    </option>
+
+    <option value="Half Monthly">
+      Half Monthly
+    </option>
+
+    <option value="Weekly">
+      Weekly
+    </option>
+
+  </select>
+
+</div>
+
+<!-- REPORT -->
 <div id="report">
+
+  <!-- Date Time -->
+  <div class="topRight">
+
+    <div id="dateTime"></div>
+
+    <div id="showName"></div>
+
+  </div>
+
+  <!-- Name only first image -->
+  <h1 id="mainHeading">
+    Its by : Nikhil Kumar
+  </h1>
 
   <!-- Report title -->
   <h2 id="reportTitle">
     Monthly Report
   </h2>
 
-  <!-- Hide in image -->
-  <div id="selectSection">
-
-    <label>Select Report :</label>
-
-    <select id="reportType">
-
-      <option value="Monthly">
-        Monthly
-      </option>
-
-      <option value="Half Monthly">
-        Half Monthly
-      </option>
-
-      <option value="Weekly">
-        Weekly
-      </option>
-
-    </select>
-
-  </div>
-
-  <br>
-
+  <!-- TABLE -->
   <table>
 
     <tr>
@@ -122,20 +174,24 @@
 
 <br>
 
-<button onclick="calculateTotal()">
-  Calculate
-</button>
+<div class="btns">
 
-<button onclick="downloadImage()">
-  Download Image
-</button>
+  <button onclick="calculateTotal()">
+    Calculate
+  </button>
+
+  <button onclick="downloadImage()">
+    Download Image
+  </button>
+
+</div>
 
 <script>
 
   let tableBody =
   document.getElementById("tableBody");
 
-  // Create rows
+  // Create rows 1 to 31
   for(let i = 1; i <= 31; i++){
 
     tableBody.innerHTML += `
@@ -144,10 +200,12 @@
         <td>${i}</td>
 
         <td>
+
           <input
           type="number"
           class="dayInput"
           value="0">
+
         </td>
 
       </tr>
@@ -191,22 +249,36 @@
 
   }
 
-  // Download image
-  function downloadImage(){
+  // Download Images
+  async function downloadImage(){
 
-    // Report title update
+    // Report title
     let type =
     document.getElementById("reportType").value;
 
     document.getElementById("reportTitle").innerHTML =
     type + " Report";
 
-    // Hide dropdown section
-    document.getElementById("selectSection").style.display =
-    "none";
+    // Current date time
+    let now = new Date();
+
+    let dateTime =
+    now.toLocaleString();
+
+    document.getElementById("dateTime").innerHTML =
+    dateTime;
+
+    // Customer name
+    let customer =
+    document.getElementById("customerName").value;
+
+    document.getElementById("showName").innerHTML =
+    customer;
 
     let rows =
     document.querySelectorAll("#tableBody tr");
+
+    let visibleRows = [];
 
     // Hide empty rows
     rows.forEach(function(row){
@@ -217,7 +289,13 @@
       let value =
       Number(input.value);
 
-      if(value <= 0){
+      if(value > 0){
+
+        visibleRows.push(row);
+
+      }
+
+      else{
 
         row.style.display = "none";
 
@@ -225,10 +303,66 @@
 
     });
 
-    let report =
-    document.getElementById("report");
+    // 16 rows per image
+    let chunkSize = 16;
 
-    html2canvas(report).then(function(canvas){
+    // Multiple images
+    for(
+      let start = 0;
+      start < visibleRows.length;
+      start += chunkSize
+    ){
+
+      // Hide all visible rows
+      visibleRows.forEach(function(r){
+
+        r.style.display = "none";
+
+      });
+
+      // Show current chunk
+      let chunk =
+      visibleRows.slice(
+        start,
+        start + chunkSize
+      );
+
+      chunk.forEach(function(r){
+
+        r.style.display = "";
+
+      });
+
+      // Hide heading after first image
+      if(start >= chunkSize){
+
+        document.getElementById("mainHeading").style.display =
+        "none";
+
+        document.getElementById("showName").style.display =
+        "none";
+
+      }
+
+      else{
+
+        document.getElementById("mainHeading").style.display =
+        "block";
+
+        document.getElementById("showName").style.display =
+        "block";
+
+      }
+
+      let report =
+      document.getElementById("report");
+
+      let canvas =
+      await html2canvas(report, {
+
+        scale: 3
+
+      });
 
       let a =
       document.createElement("a");
@@ -237,22 +371,40 @@
       canvas.toDataURL("image/png");
 
       a.download =
-      "report.png";
+      "report_part_" +
+      (start / chunkSize + 1) +
+      ".png";
 
-      a.click();
+      document.body.appendChild(a);
 
-      // Show rows again
-      rows.forEach(function(row){
+      setTimeout(() => {
 
-        row.style.display = "";
+        a.click();
 
-      });
+      }, 500);
 
-      // Show dropdown again
-      document.getElementById("selectSection").style.display =
-      "block";
+      // Delay for mobile
+      await new Promise(resolve =>
+        setTimeout(resolve, 1500)
+      );
+
+      document.body.removeChild(a);
+
+    }
+
+    // Show all rows again
+    rows.forEach(function(row){
+
+      row.style.display = "";
 
     });
+
+    // Reset heading
+    document.getElementById("mainHeading").style.display =
+    "block";
+
+    document.getElementById("showName").style.display =
+    "block";
 
   }
 
