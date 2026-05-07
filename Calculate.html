@@ -10,9 +10,10 @@
   <style>
 
     body{
-      font-family:Arial;
       padding:20px;
-      background:#f4f4f4;
+      background:#f5f7fa;
+      font-family: Arial, Helvetica, sans-serif;
+      color:#111827;
     }
 
     #report{
@@ -26,19 +27,30 @@
 
     h1{
       text-align:center;
-      color:darkblue;
-      margin-bottom:5px;
+      color:#1e3a8a;
+      margin-bottom:35px;
+      margin-right:250px;
+      font-size:30px;
     }
 
     h2{
       text-align:center;
       margin-top:0;
+      color:#111827;
+      font-size:40px;
     }
 
     table{
       border-collapse:collapse;
       width:100%;
       margin-top:10px;
+      background:white;
+      color:#222;
+    }
+
+    th{
+      background:#023648;
+      color:white;
     }
 
     th,td{
@@ -52,6 +64,9 @@
       width:140px;
       padding:6px;
       font-size:16px;
+      background:white;
+      border:1px solid #7e7e7e;
+      border-radius:5px;
     }
 
     button{
@@ -59,6 +74,14 @@
       padding:10px 15px;
       cursor:pointer;
       font-size:16px;
+      background:#2c5dc6;
+      color:white;
+      border:none;
+      border-radius:6px;
+    }
+
+    button:hover{
+      background:#001346;
     }
 
     .btns{
@@ -70,13 +93,37 @@
       top:15px;
       right:20px;
       text-align:right;
-      font-size:14px;
-      line-height:22px;
+      line-height:24px;
+    }
+
+    .dateBox{
+      font-size:15px;
+      font-weight:bold;
+      color:#1f2937;
+    }
+
+    .customerBox{
+      font-size:16px;
+      color:#0f172a;
+      font-weight:bold;
+    }
+
+    .pageNo{
+      position:absolute;
+      top:15px;
+      left:20px;
+      font-size:13px;
+      color:#4b5563;
+      font-weight:bold;
     }
 
     .topInputs{
       margin-bottom:15px;
       text-align:center;
+    }
+
+    #rateSection{
+      margin-top:15px;
     }
 
   </style>
@@ -120,21 +167,26 @@
 <!-- REPORT -->
 <div id="report">
 
+  <!-- Page Number -->
+  <div class="pageNo" id="pageNumber">
+    Page No. 1
+  </div>
+
   <!-- Date Time -->
   <div class="topRight">
 
-    <div id="dateTime"></div>
+    <div class="dateBox" id="dateTime"></div>
 
-    <div id="showName"></div>
+    <div class="customerBox" id="showName"></div>
 
   </div>
 
-  <!-- Name only first image -->
+  <!-- Creator Name -->
   <h1 id="mainHeading">
     Its by : Nikhil Kumar
   </h1>
 
-  <!-- Report title -->
+  <!-- Report Title -->
   <h2 id="reportTitle">
     Monthly Report
   </h2>
@@ -151,17 +203,23 @@
 
   </table>
 
-  <br>
+  <!-- RATE -->
+  <div id="rateSection">
 
-  <label>Rate :</label>
+    <br>
 
-  <input
-  type="number"
-  id="multiplyNum"
-  value="5">
+    <label>Rate :</label>
+
+    <input
+    type="number"
+    id="multiplyNum"
+    value="5">
+
+  </div>
 
   <br><br>
 
+  <!-- TOTALS -->
   <h3 id="total">
     Total Chapati : 0
   </h3>
@@ -191,7 +249,7 @@
   let tableBody =
   document.getElementById("tableBody");
 
-  // Create rows 1 to 31
+  // Create 1 to 31 rows
   for(let i = 1; i <= 31; i++){
 
     tableBody.innerHTML += `
@@ -259,21 +317,34 @@
     document.getElementById("reportTitle").innerHTML =
     type + " Report";
 
-    // Current date time
+    // Date & Time
     let now = new Date();
 
+    let options = {
+
+      day:'2-digit',
+      month:'long',
+      year:'numeric',
+      hour:'2-digit',
+      minute:'2-digit'
+
+    };
+
     let dateTime =
-    now.toLocaleString();
+    now.toLocaleString(
+      'en-IN',
+      options
+    );
 
     document.getElementById("dateTime").innerHTML =
     dateTime;
 
-    // Customer name
+    // Customer Name
     let customer =
     document.getElementById("customerName").value;
 
-   <!-- document.getElementById("showName").innerHTML =
-    customer; -->
+    document.getElementById("showName").innerHTML =
+    customer;
 
     let rows =
     document.querySelectorAll("#tableBody tr");
@@ -306,14 +377,20 @@
     // 16 rows per image
     let chunkSize = 16;
 
-    // Multiple images
+    // Total images
+    let totalImages =
+    Math.ceil(
+      visibleRows.length / chunkSize
+    );
+
+    // Generate images
     for(
       let start = 0;
       start < visibleRows.length;
       start += chunkSize
     ){
 
-      // Hide all visible rows
+      // Hide all rows
       visibleRows.forEach(function(r){
 
         r.style.display = "none";
@@ -333,13 +410,15 @@
 
       });
 
-      // Hide heading after first image
+      // Page Number
+      document.getElementById("pageNumber").innerHTML =
+      "Page No. " +
+      (start / chunkSize + 1);
+
+      // First image only
       if(start >= chunkSize){
 
         document.getElementById("mainHeading").style.display =
-        "none";
-
-        document.getElementById("showName").style.display =
         "none";
 
       }
@@ -349,8 +428,56 @@
         document.getElementById("mainHeading").style.display =
         "block";
 
-        document.getElementById("showName").style.display =
+      }
+
+      // Customer name always visible
+      document.getElementById("showName").style.display =
+      "block";
+
+      // SINGLE IMAGE
+      if(totalImages == 1){
+
+        document.getElementById("rateSection").style.display =
         "block";
+
+        document.getElementById("total").style.display =
+        "block";
+
+        document.getElementById("finalTotal").style.display =
+        "block";
+
+      }
+
+      // MULTIPLE IMAGES
+      else{
+
+        // LAST IMAGE
+        if(start + chunkSize >= visibleRows.length){
+
+          document.getElementById("rateSection").style.display =
+          "block";
+
+          document.getElementById("total").style.display =
+          "block";
+
+          document.getElementById("finalTotal").style.display =
+          "block";
+
+        }
+
+        // FIRST IMAGE
+        else{
+
+          document.getElementById("rateSection").style.display =
+          "none";
+
+          document.getElementById("total").style.display =
+          "none";
+
+          document.getElementById("finalTotal").style.display =
+          "none";
+
+        }
 
       }
 
@@ -360,7 +487,7 @@
       let canvas =
       await html2canvas(report, {
 
-        scale: 3
+        scale:3
 
       });
 
@@ -392,18 +519,23 @@
 
     }
 
-    // Show all rows again
+    // Reset UI
     rows.forEach(function(row){
 
       row.style.display = "";
 
     });
 
-    // Reset heading
     document.getElementById("mainHeading").style.display =
     "block";
 
-    document.getElementById("showName").style.display =
+    document.getElementById("rateSection").style.display =
+    "block";
+
+    document.getElementById("total").style.display =
+    "block";
+
+    document.getElementById("finalTotal").style.display =
     "block";
 
   }
