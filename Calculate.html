@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Smart Report System</title>
+
+  <!-- html2canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <style>
+
+    body{
+      font-family:Arial;
+      padding:20px;
+      background:#f4f4f4;
+    }
+
+    #report{
+      width:400px;
+      background:white;
+      padding:20px;
+      border:2px solid black;
+    }
+
+    table{
+      border-collapse:collapse;
+      width:100%;
+    }
+
+    th,td{
+      border:1px solid black;
+      padding:8px;
+      text-align:center;
+    }
+
+    input,select{
+      width:100px;
+      padding:5px;
+    }
+
+    button{
+      margin-top:10px;
+      padding:10px 15px;
+      cursor:pointer;
+    }
+
+    h2{
+      text-align:center;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<h1>Its by : Nikhil Kumar</h1>
+
+<div id="report">
+
+  <!-- Report title -->
+  <h2 id="reportTitle">
+    Monthly Report
+  </h2>
+
+  <!-- Hide in image -->
+  <div id="selectSection">
+
+    <label>Select Report :</label>
+
+    <select id="reportType">
+
+      <option value="Monthly">
+        Monthly
+      </option>
+
+      <option value="Half Monthly">
+        Half Monthly
+      </option>
+
+      <option value="Weekly">
+        Weekly
+      </option>
+
+    </select>
+
+  </div>
+
+  <br>
+
+  <table>
+
+    <tr>
+      <th>Date</th>
+      <th>Chapati</th>
+    </tr>
+
+    <tbody id="tableBody"></tbody>
+
+  </table>
+
+  <br>
+
+  <label>Rate :</label>
+
+  <input
+  type="number"
+  id="multiplyNum"
+  value="5">
+
+  <br><br>
+
+  <h3 id="total">
+    Total Chapati : 0
+  </h3>
+
+  <h3 id="finalTotal">
+    Total Rs. : 0
+  </h3>
+
+</div>
+
+<br>
+
+<button onclick="calculateTotal()">
+  Calculate
+</button>
+
+<button onclick="downloadImage()">
+  Download Image
+</button>
+
+<script>
+
+  let tableBody =
+  document.getElementById("tableBody");
+
+  // Create rows
+  for(let i = 1; i <= 31; i++){
+
+    tableBody.innerHTML += `
+      <tr>
+
+        <td>${i}</td>
+
+        <td>
+          <input
+          type="number"
+          class="dayInput"
+          value="0">
+        </td>
+
+      </tr>
+    `;
+  }
+
+  // Calculate total
+  function calculateTotal(){
+
+    let inputs =
+    document.getElementsByClassName("dayInput");
+
+    let total = 0;
+
+    for(let i = 0; i < inputs.length; i++){
+
+      let value =
+      Number(inputs[i].value);
+
+      if(value > 0){
+
+        total += value;
+
+      }
+
+    }
+
+    document.getElementById("total").innerHTML =
+    "Total Chapati : " + total;
+
+    let multiplyValue =
+    Number(
+      document.getElementById("multiplyNum").value
+    );
+
+    let final =
+    total * multiplyValue;
+
+    document.getElementById("finalTotal").innerHTML =
+    "Total Rs. : " + final;
+
+  }
+
+  // Download image
+  function downloadImage(){
+
+    // Report title update
+    let type =
+    document.getElementById("reportType").value;
+
+    document.getElementById("reportTitle").innerHTML =
+    type + " Report";
+
+    // Hide dropdown section
+    document.getElementById("selectSection").style.display =
+    "none";
+
+    let rows =
+    document.querySelectorAll("#tableBody tr");
+
+    // Hide empty rows
+    rows.forEach(function(row){
+
+      let input =
+      row.querySelector("input");
+
+      let value =
+      Number(input.value);
+
+      if(value <= 0){
+
+        row.style.display = "none";
+
+      }
+
+    });
+
+    let report =
+    document.getElementById("report");
+
+    html2canvas(report).then(function(canvas){
+
+      let a =
+      document.createElement("a");
+
+      a.href =
+      canvas.toDataURL("image/png");
+
+      a.download =
+      "report.png";
+
+      a.click();
+
+      // Show rows again
+      rows.forEach(function(row){
+
+        row.style.display = "";
+
+      });
+
+      // Show dropdown again
+      document.getElementById("selectSection").style.display =
+      "block";
+
+    });
+
+  }
+
+</script>
+
+</body>
+</html>
