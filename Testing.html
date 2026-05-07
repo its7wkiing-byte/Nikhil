@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Smart Report System</title>
+
+  <!-- html2canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <style>
+
+    body{
+      font-family:Arial;
+      padding:20px;
+      background:#f4f4f4;
+    }
+
+    #report{
+      width:500px;
+      background:white;
+      padding:20px;
+      border:2px solid black;
+      margin:auto;
+    }
+
+    h1{
+      text-align:center;
+      color:darkblue;
+    }
+
+    h2{
+      text-align:center;
+    }
+
+    table{
+      border-collapse:collapse;
+      width:100%;
+      margin-top:10px;
+    }
+
+    th,td{
+      border:1px solid black;
+      padding:10px;
+      text-align:center;
+      font-size:18px;
+    }
+
+    input,select{
+      width:120px;
+      padding:6px;
+      font-size:16px;
+    }
+
+    button{
+      margin-top:10px;
+      padding:10px 15px;
+      cursor:pointer;
+      font-size:16px;
+    }
+
+    .btns{
+      text-align:center;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<div id="report">
+
+  <!-- Heading -->
+  <h1>
+    Its by : Nikhil Kumar
+  </h1>
+
+  <!-- Report title -->
+  <h2 id="reportTitle">
+    Monthly Report
+  </h2>
+
+  <!-- Hidden in image -->
+  <div id="selectSection">
+
+    <label>Select Report :</label>
+
+    <select id="reportType">
+
+      <option value="Monthly">
+        Monthly
+      </option>
+
+      <option value="Half Monthly">
+        Half Monthly
+      </option>
+
+      <option value="Weekly">
+        Weekly
+      </option>
+
+    </select>
+
+  </div>
+
+  <br>
+
+  <!-- Table -->
+  <table>
+
+    <tr>
+      <th>Date</th>
+      <th>Chapati</th>
+    </tr>
+
+    <tbody id="tableBody"></tbody>
+
+  </table>
+
+  <br>
+
+  <label>Rate :</label>
+
+  <input
+  type="number"
+  id="multiplyNum"
+  value="5">
+
+  <br><br>
+
+  <h3 id="total">
+    Total Chapati : 0
+  </h3>
+
+  <h3 id="finalTotal">
+    Total Rs. : 0
+  </h3>
+
+</div>
+
+<br>
+
+<div class="btns">
+
+  <button onclick="calculateTotal()">
+    Calculate
+  </button>
+
+  <button onclick="downloadImage()">
+    Download Image
+  </button>
+
+</div>
+
+<script>
+
+  let tableBody =
+  document.getElementById("tableBody");
+
+  // Create 1 to 31 rows
+  for(let i = 1; i <= 31; i++){
+
+    tableBody.innerHTML += `
+      <tr>
+
+        <td>${i}</td>
+
+        <td>
+
+          <input
+          type="number"
+          class="dayInput"
+          value="0">
+
+        </td>
+
+      </tr>
+    `;
+  }
+
+  // Calculate total
+  function calculateTotal(){
+
+    let inputs =
+    document.getElementsByClassName("dayInput");
+
+    let total = 0;
+
+    for(let i = 0; i < inputs.length; i++){
+
+      let value =
+      Number(inputs[i].value);
+
+      if(value > 0){
+
+        total += value;
+
+      }
+
+    }
+
+    document.getElementById("total").innerHTML =
+    "Total Chapati : " + total;
+
+    let multiplyValue =
+    Number(
+      document.getElementById("multiplyNum").value
+    );
+
+    let final =
+    total * multiplyValue;
+
+    document.getElementById("finalTotal").innerHTML =
+    "Total Rs. : " + final;
+
+  }
+
+  // Download image in multiple parts
+  async function downloadImage(){
+
+    // Update report title
+    let type =
+    document.getElementById("reportType").value;
+
+    document.getElementById("reportTitle").innerHTML =
+    type + " Report";
+
+    // Hide dropdown
+    document.getElementById("selectSection").style.display =
+    "none";
+
+    let rows =
+    document.querySelectorAll("#tableBody tr");
+
+    let visibleRows = [];
+
+    // Hide empty rows
+    rows.forEach(function(row){
+
+      let input =
+      row.querySelector("input");
+
+      let value =
+      Number(input.value);
+
+      if(value > 0){
+
+        visibleRows.push(row);
+
+      }
+
+      else{
+
+        row.style.display = "none";
+
+      }
+
+    });
+
+    // Rows per image
+    let chunkSize = 12;
+
+    // Multiple images
+    for(
+      let start = 0;
+      start < visibleRows.length;
+      start += chunkSize
+    ){
+
+      // Hide all visible rows
+      visibleRows.forEach(function(r){
+
+        r.style.display = "none";
+
+      });
+
+      // Show current chunk
+      let chunk =
+      visibleRows.slice(
+        start,
+        start + chunkSize
+      );
+
+      chunk.forEach(function(r){
+
+        r.style.display = "";
+
+      });
+
+      let report =
+      document.getElementById("report");
+
+      let canvas =
+      await html2canvas(report, {
+
+        scale: 3
+
+      });
+
+      let a =
+      document.createElement("a");
+
+      a.href =
+      canvas.toDataURL("image/png");
+
+      a.download =
+      "report_part_" +
+      (start / chunkSize + 1) +
+      ".png";
+
+      document.body.appendChild(a);
+
+      // Delay for mobile
+      setTimeout(() => {
+
+        a.click();
+
+      }, 500);
+
+      // Wait before next image
+      await new Promise(resolve =>
+        setTimeout(resolve, 1500)
+      );
+
+      document.body.removeChild(a);
+
+    }
+
+    // Show all rows again
+    rows.forEach(function(row){
+
+      row.style.display = "";
+
+    });
+
+    // Show dropdown again
+    document.getElementById("selectSection").style.display =
+    "block";
+
+  }
+
+</script>
+
+</body>
+</html>
