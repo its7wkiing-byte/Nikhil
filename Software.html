@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Smart Report</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<style>
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f5f7fa;
+    padding:20px;
+     font-family: papiras;
+}
+
+.topInputs{
+    margin-bottom:20px;
+}
+
+input,select{
+    padding:8px;
+    border:1px solid #999;
+    border-radius:5px;
+}
+
+button{
+    padding:10px 15px;
+    border:none;
+    background:#001342;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#005b1d;
+}
+
+#report{
+    width:800px;
+    margin:auto;
+    background:white;
+    border:2px solid black;
+    padding:10px;
+    position:relative;
+}
+
+.topRight{
+    position:absolute;
+    right:20px;
+    top:15px;
+    text-align:right;
+}
+
+.dateBox{
+    font-size:17px;
+}
+
+.customerBox{
+    font-size:20px;
+    padding: 10px 00px 10px 10px;
+    font-weight:bold;
+    color: green;
+   
+}
+
+h1{
+    color:#023648;   
+    font-size:22px;
+    margin-top:4px;
+    font-family: papyrus;
+    border: 0px dashed black;
+    border-bottom-width: 0.7px;
+    display: inline-block;
+}
+
+h2{
+    text-align:center;
+    color: #03607f;
+    border: 0px solid #023648;
+    border-bottom-width: 0.7px;
+    padding-bottom: 9px;
+    margin-bottom: 7px;
+    
+    
+    
+}
+
+.columns{
+    display:flex;
+    justify-content:center;
+    gap:40px;
+    margin-top:20px;
+}
+
+table{
+    /* border-collapse:collapse; */
+    width:250px;
+}
+
+th{
+    background:#023648;
+    color:white;
+}
+
+th,td{
+    border:1px solid black;
+    text-align:center;
+    padding:8px;
+}
+
+
+
+
+th:first-child,
+td:first-child{
+    width:60px;
+}
+
+table{
+    width:250px;
+}
+
+th:first-child,
+td:first-child{
+    width:60px;
+}
+
+th:last-child,
+td:last-child{
+    width:190px;
+}
+
+
+
+
+
+
+
+
+
+
+
+.dayInput{
+    width:80px;
+}
+
+.summary{
+  
+    background-color: #012f3f;
+    margin:15px 0px 20px 130px;
+    padding: 10px;
+    display: inline-block;
+    position: relative; 
+    bottom: 75px;
+    border-radius: 9px;
+    
+    
+}
+
+
+
+
+
+
+
+
+/* its by me for payment */
+
+.payment{
+  
+    width: 240px;
+    height: 165px;
+    background-color: #012f3f;
+    margin:0px 0px 0px 30px;
+    border-radius: 9px;
+    display: inline-block;
+    position: relative;
+    top: 20px;
+    
+}
+
+
+
+img{
+    padding-top: 20px;
+}
+
+
+
+/* End by me for payment */
+
+.btns{
+    text-align:center;
+    margin-top:20px;
+}
+
+.big{
+    font-size: 20px;
+    color: #c6c2c2;
+}
+Big.big{
+   
+    color: rgb(130, 78, 1);
+    font-family: papyrus;
+    font-weight: bolder;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="topInputs">
+
+<label>Customer Name :</label>
+
+<input
+type="text"
+id="customerName"
+placeholder="Enter Name">
+
+&nbsp;&nbsp;
+
+<label>Select Report :</label>
+
+<select id="reportType">
+
+<option value="Monthly">
+Monthly
+</option>
+
+<option value="Half Monthly">
+Half Monthly
+</option>
+
+<option value="Weekly">
+Weekly
+</option>
+
+</select>
+
+</div>
+
+<div id="report">
+
+<div class="topRight">
+
+<div
+class="dateBox"
+id="dateTime">
+</div>
+
+<div class="customerBox">
+Customer : <span id="showName"></span>
+</div>
+
+</div>
+
+<h1>
+👳‍♀️ Sunita Chapati Services ✔
+</h1>
+
+<h2 id="reportTitle">
+Monthly Report
+</h2>
+
+<div class="columns">
+
+<table>
+
+<tr>
+<th>Date</th>
+<th>Chapati</th>
+</tr>
+
+<tbody id="body1"></tbody>
+
+</table>
+
+<table>
+
+<tr>
+<th>Date</th>
+<th>Chapati</th>
+</tr>
+
+<tbody id="body2"></tbody>
+
+</table>
+
+</div>
+
+<div class="summary">
+
+<label class="big" class>Rate :</label>
+
+<input
+type="number"
+id="multiplyNum"
+value="5">
+
+<h3 id="total"  class="big">
+🫓 Total Chapati : 0
+</h3>
+
+<h3 class="big" id="finalTotal">
+💵 Total Rs. : 0
+</h3>
+
+</div>
+
+
+
+
+
+
+
+<div class="payment">
+<center>
+    
+    <img src="https://raw.githubusercontent.com/its7wkiing-byte/Nikhil/main/Pay.jpeg" width="170px"><br>
+    <Big class="big">Scane to pay</Big>
+</center>
+</div>
+
+
+
+
+
+
+
+
+</div>
+
+<div class="btns">
+
+<button onclick="calculateTotal()">
+💸 Calculate
+</button>
+
+<button onclick="downloadImage()">
+⬇️ Download Image
+</button>
+
+</div>
+
+<script>
+
+let body1 =
+document.getElementById("body1");
+
+let body2 =
+document.getElementById("body2");
+
+
+  // part 2
+
+  // Left Table (1 to 16)
+
+for(
+let i = 1;
+i <= 16;
+i++
+){
+
+body1.innerHTML += `
+
+<tr>
+
+<td>${i}</td>
+
+<td>
+
+<input
+type="number"
+class="dayInput"
+value="">
+
+</td>
+
+</tr>
+
+`;
+
+}
+
+// Right Table (17 to 31)
+
+for(
+let i = 17;
+i <= 31;
+i++
+){
+
+body2.innerHTML += `
+
+<tr>
+
+<td>${i}</td>
+
+<td>
+
+<input
+type="number"
+class="dayInput"
+value="">
+
+</td>
+
+</tr>
+
+`;
+
+}
+
+// Calculate Total
+
+function calculateTotal(){
+
+let inputs =
+
+document.getElementsByClassName(
+"dayInput"
+);
+
+let total = 0;
+
+for(
+let i = 0;
+i < inputs.length;
+i++
+){
+
+let value =
+
+Number(
+inputs[i].value
+);
+
+if(value > 0){
+
+total += value;
+
+}
+
+}
+
+document.getElementById(
+"total"
+).innerHTML =
+
+"🫓 Total Chapati : " +
+total;
+
+let rate =
+
+Number(
+document.getElementById(
+"multiplyNum"
+).value
+);
+
+let finalAmount =
+
+total * rate;
+
+document.getElementById(
+"finalTotal"
+).innerHTML =
+
+"💵 Total Rs. : " +
+finalAmount;
+
+}
+
+  //  part 3 and Final
+
+  
+
+// Create Image
+
+async function downloadImage() {
+
+    calculateTotal();
+
+    let customer =
+    document.getElementById("customerName").value;
+
+    document.getElementById("showName").innerHTML =
+    customer;
+
+    let type =
+    document.getElementById("reportType").value;
+
+    document.getElementById("reportTitle").innerHTML =
+    type + " Report";
+
+    let now = new Date();
+
+    document.getElementById("dateTime").innerHTML =
+    now.toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+
+    // Original HTML save
+    let originalBody1 = body1.innerHTML;
+    let originalBody2 = body2.innerHTML;
+
+    // Filled data collect
+    let data = [];
+
+    document.querySelectorAll("tbody tr").forEach(row => {
+
+        let input = row.querySelector(".dayInput");
+
+        if (input && input.value.trim() !== "") {
+
+            data.push({
+                date: row.cells[0].innerText,
+                chapati: input.value
+            });
+
+        }
+
+    });
+
+    // Data split into 2 tables
+    let half = Math.ceil(data.length / 2);
+
+    let leftData = data.slice(0, half);
+    let rightData = data.slice(half);
+
+    // Rebuild tables
+    body1.innerHTML = "";
+    body2.innerHTML = "";
+
+    leftData.forEach(item => {
+
+        body1.innerHTML += `
+        <tr>
+            <td>${item.date}</td>
+            <td>${item.chapati}</td>
+        </tr>
+        `;
+
+    });
+
+    rightData.forEach(item => {
+
+        body2.innerHTML += `
+        <tr>
+            <td>${item.date}</td>
+            <td>${item.chapati}</td>
+        </tr>
+        `;
+
+    });
+
+    try {
+
+        const canvas = await html2canvas(
+            document.getElementById("report"),
+            {
+                scale: 3,
+                useCORS: true,
+                // allowTaint: false
+            }
+        );
+
+        const link =
+        document.createElement("a");
+
+        link.href =
+        canvas.toDataURL("image/png");
+
+        link.download =
+        (customer || "Report") + ".png";
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
+
+    } catch (err) {
+
+        console.error(err);
+        alert(err);
+
+    }
+
+    
+
+    // Original table restore
+    body1.innerHTML = originalBody1;
+    body2.innerHTML = originalBody2;
+}
+
+</script>
+
+</body>
+</html>
